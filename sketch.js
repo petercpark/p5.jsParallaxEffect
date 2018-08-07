@@ -1,49 +1,47 @@
 //parallax mouse
-var total = 2;
-
 var fox;
 var bg;
 
 var xPos;
 var yPos;
-var divider = [5, 10];
+var divider = [5, 20];
 
 var easing = 0.1;
 var x = [];
 var y = [];
 
 function preload(){
-	fox = loadImage('fox.png');
-	bg = loadImage('background.jpeg');
+	fox = loadImage('https://image.ibb.co/ds5trK/fox.png');
+	bg = loadImage('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/background.jpg');
 }
 
 function setup(){
 var cnv = createCanvas(windowWidth, windowHeight);
 cnv.style('display', 'block');
 
-for (var i = 0; i < total; i++) {
-	x[i] = width/2;
-	y[i] = height/2;
+for (var i = 0; i < divider.length; i++) {
+	x[i] = 0;
+	y[i] = 0;
 }
 
 }
 
 function draw(){
-	background(100);
+	background(0);
 
-	xPos = width/2 - (mouseX - width/2);
-	yPos = height/2 - (mouseY - height/2);
+	xPos = (mouseX - width/2);
+	yPos = (mouseY - height/2);
 
 	easeFunction();
 
 	imageMode(CENTER);
-	image(bg, x[0], y[0], width + 500, height + 500);
-	image(fox, x[1], y[1]);
+	image(bg, width/2 + x[1], height/2 + y[1], bg.width * 4/3, bg.height * 4/3);
+	image(fox, width/2 + x[0], height/2 + y[0]);
 }
 
 function easeFunction(){
-	for (var i = 0; i < total; i++) {
-	x[i] += (xPos / divider[i] - x) * easing;
-	y[i] += (yPos / divider[i] - y) * easing;
+	for (var i = 0; i < divider.length; i++) {
+	x[i] += (xPos / divider[i] - x[i]) * easing;
+	y[i] += (yPos / divider[i] - y[i]) * easing;
  }
 }
