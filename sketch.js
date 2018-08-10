@@ -39,11 +39,11 @@ function preload(){
 	scrollImg.style('display', 'none');
 }
 
-function loadFiles(filename) {
+function loadFiles(filename, i) {
   loadImage(filename, filesLoaded);
 
   function filesLoaded(file) {
-    img.push(file);
+    img[i] = file;
     counter++;
     if (counter == totalFiles) {
       loading = false;
@@ -62,9 +62,9 @@ for (var i = 0; i < speed.length; i++) {
 	y[i] = 0;
 }
 
-loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/background.jpg');
-loadFiles('https://image.ibb.co/ds5trK/fox.png');
-//loadFiles('https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png?raw=true');
+loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/background.jpg', 0);
+loadFiles('https://image.ibb.co/ds5trK/fox.png', 1);
+loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/GitHub-Logo.png', 2);
 
 }
 
