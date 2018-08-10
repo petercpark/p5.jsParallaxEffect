@@ -64,6 +64,7 @@ for (var i = 0; i < speed.length; i++) {
 
 loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/background.jpg');
 loadFiles('https://image.ibb.co/ds5trK/fox.png');
+//loadFiles('https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png?raw=true');
 
 }
 
@@ -113,7 +114,7 @@ function draw(){
   	}
   	//move firstFrame and secondFrame up to hide and show respectively
   	firstFrame(width, heightY, perc);
-  	secondFrame();
+  	//secondFrame(width, heightY, perc);
   }
  }
 }
@@ -157,6 +158,7 @@ function firstFrame(w, h, o){
 	scrollImg.style('opacity', o);
 	scrollImg.position(w/2 - 50, h - 100);
 }
-function secondFrame(){
-
-}
+/*
+function secondFrame(w, h, o){
+	image(img[2], w * 2/3 - x[0], h/2 - y[0]);
+}*/
