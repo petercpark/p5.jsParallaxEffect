@@ -30,6 +30,8 @@ var timesChanged = 0;
 var secondSlide = false;
 var down = false;
 var clicked = false;
+var dx;
+var dy;
 
 //canvas
 var cnv;
@@ -167,12 +169,14 @@ function firstFrame(w, h, o){
 }
 
 function secondFrame(w, h, o){
+	dx = w * 1/4 - x[3];
+	dy = h/2+50 - y[3];
 	//text
 	textAlign(CENTER);
 	textSize(75);
 	fill(178, 68, 229, 255 * o);
 	textFont('Sedgwick Ave Display');
-	text('Download on Github', w * 2/5 - x[2], h/2 - y[2]);
+	text('See it on Github', w * 2/5 - x[2], h/2 - y[2]);
 	//octocat
 	tint(255, 255*o);
 	image(img[2], w * 2/3 - x[0], h/2 - y[0], img[2].width * 3/4, img[2].height * 3/4);
@@ -180,10 +184,8 @@ function secondFrame(w, h, o){
 	//button
 	fill(244, 84, 33, 255*o);
 	noStroke();
-	var dx = w * 1/4 - x[3];
-	var dy = h/2+50 - y[3];
 	//if mouse hover over rect
-	if (mouseX > dx-200 && mouseX < dx+200 && mouseY > dy-100 && mouseY < dy+100) {
+	if (mouseX > dx && mouseX < dx+200 && mouseY > dy && mouseY < dy+100) {
 	fill(234, 56, 0, 255*o);
 	if (clicked) {
 		window.open('https://github.com/petercpark/p5.jsParallaxEffect');
@@ -196,7 +198,7 @@ function secondFrame(w, h, o){
 }
 
 function mouseClicked(){
-	if (second) {
+	if (second && mouseX > dx && mouseX < dx+200 && mouseY > dy && mouseY < dy+100) {
 		clicked = true;
 	}
 }
