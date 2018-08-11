@@ -14,8 +14,8 @@ var scrollImg;
 
 //the parallax part
 var xPos;
-var yPos;//text, bg, fox, box
-var speed = [20, 80, 25, 15]; //the greater the speed the slower it is
+var yPos;//fox, bg, text, box
+var speed = [10, 80, 30, 20]; //the greater the speed the slower it is
 
 //ease the element towards the mouse
 var easing = 0.3;
@@ -143,14 +143,14 @@ function mouseWheel(event){
 function firstFrame(w, h, o){
 	//parallax pg.js
 	textAlign(CENTER);
-	textSize(w/15);
+	textSize(75);
 	fill(25, 255 * o);
 	textFont('Sedgwick Ave Display');
 	text('Parallax p5.js', w * 6.2/10 - x[2], h/2 - y[2]);
 
 	//fox image
 	tint(255, 255 * o);
-	image(img[1], w/3.3- x[0], h/2 - y[0]);
+	image(img[1], w * 1/3- x[0], h/2 - y[0]);
 	noTint();
 
 	//that arrow thing at the bottom
@@ -165,17 +165,31 @@ function firstFrame(w, h, o){
 }
 
 function secondFrame(w, h, o){
+	//text
 	textAlign(CENTER);
-	textSize(w/15);
+	textSize(75);
 	fill(178, 68, 229, 255 * o);
 	textFont('Sedgwick Ave Display');
 	text('Download on Github', w * 2/5 - x[2], h/2 - y[2]);
-
+	//octocat
 	tint(255, 255*o);
-	image(img[2], w * 3/4 - x[0], h/2 - y[0], img[2].width * 3/4, img[2].height * 3/4);
+	image(img[2], w * 2/3 - x[0], h/2 - y[0], img[2].width * 3/4, img[2].height * 3/4);
 	noTint();
-
-	fill(244, 110, 66, 255*o);
+	//button
+	fill(244, 84, 33, 255*o);
 	noStroke();
-	rect(w * 1/5 - x[3], h/2+50 - y[3], 200, 100, 20);
+	var dx = w * 1/4 - x[3];
+	var dy = h/2+50 - y[3];
+	//if mouse hover over rect
+	if (mouseX > dx-200 && mouseX < dx+200 && mouseY > dy-100 && mouseY < dy+100) {
+	fill(234, 56, 0, 255*o)
+	}
+
+	var button = rect(dx, dy, 200, 100, 20);
+}
+
+function mouseClicked(){
+	if (second) {
+
+	}
 }
