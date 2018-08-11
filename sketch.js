@@ -74,7 +74,7 @@ function draw(){
 	if(perc <= 1){perc += percSpeed;}
 	heightY += heightYSpeed;
 	firstFrame(width, heightY, perc);
-	secondFrame(width, heightY+height*3/4, 1 - perc);
+	secondFrame(width, heightY+height/2, 1 - perc);
 	timesChanged--;
 	if (timesChanged == 0) {
 		down = false;
