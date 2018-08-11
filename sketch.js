@@ -1,11 +1,11 @@
-//why does this only sometimes work?
-
 //loading elements
-var loader;
 var counter = 0;
 var loading = true;
 var totalFiles = 3;
-var img = [];
+var bg;
+var fox;
+var octo;
+var gitlogo;
 
 //that little arrow thing at the bottom
 var scrollImg;
@@ -20,7 +20,7 @@ var easing = 0.3;
 var x = [];
 var y = [];
 var heightY;
-var heightYSpeed = 70;
+var heightYSpeed = 60;
 var perc = 1;
 var percSpeed = 0.1;
 var timesChanged = 0;
@@ -35,21 +35,12 @@ var dy;
 var cnv;
 
 function preload(){
-	loader = createImg('loadicon.gif');
+	bg = loadImage('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/background.jpg');
+	fox = loadImage('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/fox.gif');
+	octo = loadImage('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/Octocat.png');
+	gitlogo = loadImage('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/github-logo.gif');
 	scrollImg = createImg('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/scroll.gif').size(100, 100);
 	scrollImg.style('display', 'none');
-}
-
-function loadFiles(filename, i) {
-  loadImage(filename, filesLoaded);
-
-  function filesLoaded(file) {
-    img[i] = file;
-    counter++;
-    if (counter == totalFiles) {
-      loading = false;
-    }
-  }
 }
 
 function setup(){
@@ -62,27 +53,15 @@ for (var i = 0; i < speed.length; i++) {
 	x[i] = 0;
 	y[i] = 0;
 }
-loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/background.jpg', 0);
-loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/fox.gif', 1);
-loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/Octocat.png', 2);
-loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/github-logo.gif', 3);
-
 }
 
 function draw(){
-	if (loading) {
-	background(255);
-	loader.center();
-	}
-
-	else{
-	loader.remove();
 	background(255);
 	easeFunction();
 
 	imageMode(CENTER);
 	//background image
-	image(img[0], width/2 - x[1], height/2 - y[1], width + 500, height + 500);
+	image(bg, width/2 - x[1], height/2 - y[1], width + 500, height + 500);
 
 	//if it is the first slide
 	if(secondSlide == false){
@@ -99,9 +78,10 @@ function draw(){
 	timesChanged--;
 	if (timesChanged == 0) {
 		down = false;
+	  }
 	 }
 	}
-  }
+
   	//if it is the second slide
   	if (secondSlide) {
   	//also if the opacity is not 0
@@ -116,9 +96,8 @@ function draw(){
   	}
   	//move firstFrame and secondFrame up to hide and show respectively
   	firstFrame(width, heightY, perc);
-  	secondFrame(width, heightY+height*3/4, 1 - perc);
+  	secondFrame(width, heightY+height/2, 1 - perc);
   }
- }
 }
 
 function easeFunction(){
@@ -152,7 +131,7 @@ function firstFrame(w, h, o){
 
 	//fox image
 	tint(255, 255 * o);
-	image(img[1], w * 1/3- x[0], h/2 - y[0]);
+	image(fox, w * 1/3- x[0], h/2 - y[0], 500, 500);
 	noTint();
 
 	//that arrow thing at the bottom
@@ -177,7 +156,7 @@ function secondFrame(w, h, o){
 	text('See it on Github', w * 2/5 - x[2], h/2 - y[2]);
 	//octocat
 	tint(255, 255*o);
-	image(img[2], w * 2/3 - x[0], h/2 - y[0], img[2].width * 3/4, img[2].height * 3/4);
+	image(octo, w * 2/3 - x[0], h/2 - y[0], octo.width * 3/4, octo.height * 3/4);
 	noTint();
 	//button
 	fill(244, 84, 33, 255*o);
@@ -192,7 +171,7 @@ function secondFrame(w, h, o){
 	}
 	var button = rect(dx, dy, 200, 100, 20);
 	//github logo
-	image(img[3], dx + 100, dy + 50, 50, 50);
+	image(gitlogo, dx + 100, dy + 50, 50, 50);
 }
 
 function mouseClicked(){
