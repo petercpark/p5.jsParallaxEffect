@@ -14,11 +14,11 @@ var scrollImg;
 
 //the parallax part
 var xPos;
-var yPos;
-var speed = [15, 40, 10]; //the greater the speed the slower it is
+var yPos;//text, bg, fox, box
+var speed = [20, 80, 25, 15]; //the greater the speed the slower it is
 
 //ease the element towards the mouse
-var easing = 0.1;
+var easing = 0.3;
 var x = [];
 var y = [];
 var heightY;
@@ -61,10 +61,9 @@ for (var i = 0; i < speed.length; i++) {
 	x[i] = 0;
 	y[i] = 0;
 }
-
 loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/background.jpg', 0);
 loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/fox.gif', 1);
-loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/GitHub-Logo.png', 2);
+loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/Octocat.png', 2);
 
 }
 
@@ -94,7 +93,7 @@ function draw(){
 	if(perc <= 1){perc += percSpeed;}
 	heightY += heightYSpeed;
 	firstFrame(width, heightY, perc);
-	secondFrame(width, heightY+height*3/4, perc);
+	secondFrame(width, heightY+height*3/4, 1 - perc);
 	timesChanged--;
 	if (timesChanged == 0) {
 		down = false;
@@ -115,7 +114,7 @@ function draw(){
   	}
   	//move firstFrame and secondFrame up to hide and show respectively
   	firstFrame(width, heightY, perc);
-  	secondFrame(width, heightY+height*3/4, perc);
+  	secondFrame(width, heightY+height*3/4, 1 - perc);
   }
  }
 }
@@ -142,24 +141,41 @@ function mouseWheel(event){
 }
 
 function firstFrame(w, h, o){
-	//fox image
-	tint(255, 255 * o);
-	image(img[1], w/3 - x[0], h/2 - y[0]);
-	noTint();
-
 	//parallax pg.js
 	textAlign(CENTER);
 	textSize(w/15);
-	fill(255, 193, 158, 255 * o);
+	fill(25, 255 * o);
 	textFont('Sedgwick Ave Display');
-	text('Parallax p5.js', w * 2/3 - x[2], h/2 - y[2]);
+	text('Parallax p5.js', w * 6.2/10 - x[2], h/2 - y[2]);
+
+	//fox image
+	tint(255, 255 * o);
+	image(img[1], w/3.3- x[0], h/2 - y[0]);
+	noTint();
 
 	//that arrow thing at the bottom
 	scrollImg.show();
-	scrollImg.style('opacity', o);
-	scrollImg.position(w/2 - 50, h - 100);
+	scrollImg.position(w/2 - 50, height - 100);
+	if(down){
+	scrollImg.style('transform', 'rotate(180deg)');
+	}
+	if(timesChanged == 1){
+	scrollImg.style('transform', 'rotate(0deg)');
+	}
 }
 
 function secondFrame(w, h, o){
-	image(img[2], w * 2/3 - x[0], h/2 - y[0]);
+	textAlign(CENTER);
+	textSize(w/15);
+	fill(178, 68, 229, 255 * o);
+	textFont('Sedgwick Ave Display');
+	text('Download on Github', w * 2/5 - x[2], h/2 - y[2]);
+
+	tint(255, 255*o);
+	image(img[2], w * 3/4 - x[0], h/2 - y[0], img[2].width * 3/4, img[2].height * 3/4);
+	noTint();
+
+	fill(244, 110, 66, 255*o);
+	noStroke();
+	rect(w * 1/5 - x[3], h/2+50 - y[3], 200, 100, 20);
 }
