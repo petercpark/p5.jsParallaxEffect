@@ -1,6 +1,4 @@
-//DO TINT FOR FADE IN AND OUT
-//FIGURE OUT HOW TO MAKE THE IMAGES SLIDE BACK IN WHEN SCROLL UP
-
+//why does this only sometimes work?
 
 //loading elements
 var loader;
