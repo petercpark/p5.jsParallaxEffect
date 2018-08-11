@@ -29,6 +29,7 @@ var timesChanged = 0;
 
 var secondSlide = false;
 var down = false;
+var clicked = false;
 
 //canvas
 var cnv;
@@ -64,6 +65,7 @@ for (var i = 0; i < speed.length; i++) {
 loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/background.jpg', 0);
 loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/fox.gif', 1);
 loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/Octocat.png', 2);
+loadFiles('https://raw.githubusercontent.com/petercpark/p5.jsParallaxEffect/master/github-logo.gif', 3);
 
 }
 
@@ -182,14 +184,19 @@ function secondFrame(w, h, o){
 	var dy = h/2+50 - y[3];
 	//if mouse hover over rect
 	if (mouseX > dx-200 && mouseX < dx+200 && mouseY > dy-100 && mouseY < dy+100) {
-	fill(234, 56, 0, 255*o)
+	fill(234, 56, 0, 255*o);
+	if (clicked) {
+		window.open('https://github.com/petercpark/p5.jsParallaxEffect');
+		clicked = false;
 	}
-
+	}
 	var button = rect(dx, dy, 200, 100, 20);
+	//github logo
+	image(img[3], dx + 100, dy + 50, 50, 50);
 }
 
 function mouseClicked(){
 	if (second) {
-
+		clicked = true;
 	}
 }
