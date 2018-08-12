@@ -171,7 +171,9 @@ function secondFrame(w, h, o){
 	}
 	var button = rect(dx, dy, 200, 100, 20);
 	//github logo
+	tint(255, 255*o);
 	image(gitlogo, dx + 100, dy + 50, 50, 50);
+	noTint();
 }
 
 function mouseClicked(){
